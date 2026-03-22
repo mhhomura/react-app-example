@@ -16,8 +16,18 @@ const MainPage = () => {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = React.useState();
-    const [password, setPassword] = React.useState();
+    const [user, setUser] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState('');
+
+    const handleLogin = () => {
+        if (!user || !user.includes('@')) {
+            setError('Email must contain @');
+            return;
+        }
+        setError('');
+        navigate('/dashboard');
+    };
 
     return (
         <Container>
@@ -32,7 +42,9 @@ const MainPage = () => {
                         </Title>
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', flex: '1' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', flex: '1', width: '100%', maxWidth: '28rem' }}>
+                        {error && <p style={{ color: 'red', marginBottom: '10px', fontSize: '0.9rem' }}>{error}</p>}
+                        
                         <Row style={{ width: '100%' }}>
                             <Input label="Email" placeholder="Enter Your Email" value={user} setState={setUser} type="text" id="user" />
                         </Row>
@@ -40,10 +52,15 @@ const MainPage = () => {
                             <Input label="Password" placeholder="Enter Your Password" value={password} setState={setPassword} type="password" id="pass" />
                         </Row>
                         <Row style={{ width: '100%' }}>
-                            <Button01 onClick={() => navigate('/test_Page')}>Login</Button01>
+                            <Button01 onClick={handleLogin}>Login</Button01>
                         </Row>
                         <Row style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-                            <div style={{ cursor: 'pointer', color: '#3890E5', fontWeight: '600' }}>Don't have an account</div>
+                            <div 
+                                style={{ cursor: 'pointer', color: '#3890E5', fontWeight: '600' }}
+                                onClick={() => navigate('/signup')}
+                            >
+                                Don't have an account
+                            </div>
                             <div style={{ cursor: 'pointer', color: '#3890E5', fontWeight: '600' }}>Forgot password?</div>
                         </Row>
                     </div>

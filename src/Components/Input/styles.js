@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 25rem;
+    width: 100%;
     height: 4rem;
     > input {
         width: 100%;
@@ -9,15 +9,16 @@ export const Container = styled.div`
         border: 1px solid #ebebeb;
         background: #F1F1F1F1;
         border-radius: 25px;
-        padding: 10px;
+        padding: 15px; /* Increased padding for better look */
         font-size: 1rem;
         color: #656565;
-    }
-    @media(max-width: 1300px){
-        width: 25rem;
-    }
-    @media(max-width: 900px){
-        width: 100%;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #2473d1;
+            outline: none;
+            background: #eaf2fb; /* Light blue on focus */
+        }
     }
 `;
 
